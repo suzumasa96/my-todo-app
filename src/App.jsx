@@ -4,6 +4,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { AppLayout } from "./components/AppLayout";
+import { TaskList } from "./components/TaskList";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
       {
         // タスク一覧画面
         path: "/",
-        element: <div>タスク一覧</div>,
+        element: <TaskList />,
       },
       {
         // ゴミ箱画面
