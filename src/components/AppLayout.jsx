@@ -32,8 +32,7 @@ export function AppLayout({ children }) {
     return (
         <div className='relative flex flex-col md:flex-row min-h-screen font-sans antialiased'>
             <div className='flex min-w-64 flex-col gap-5 p-6'>
-                {/* ヘッダー (モバイル表示のみ) */}
-                <h1 className='text-3xl'>Todo App</h1>
+                <h1 className='text-3xl'>Todoリスト</h1>
                 <nav>
                     <ul className='flex flex-col gap-2'>
                         {sideMenu.map(({ path, label, icon }) => (
