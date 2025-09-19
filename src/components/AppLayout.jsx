@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority';
-import { Trash2, BookCheck } from 'lucide-react';
+import { Trash2, BookCheck, Menu } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 // サイドメニューを定義
@@ -28,9 +28,11 @@ const linkVariants = cva("flex items-center gap-2 rounded px-5 py-3", {
 
 export function AppLayout({ children }) {
     const { pathname } = useLocation(); // 現在の URL パスを取得
+
     return (
-        <div className='flex min-h-screen'>
+        <div className='relative flex flex-col md:flex-row min-h-screen font-sans antialiased'>
             <div className='flex min-w-64 flex-col gap-5 p-6'>
+                {/* ヘッダー (モバイル表示のみ) */}
                 <h1 className='text-3xl'>Todo App</h1>
                 <nav>
                     <ul className='flex flex-col gap-2'>
