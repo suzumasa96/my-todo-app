@@ -1,46 +1,9 @@
-import { useEffect, useState } from "react";
 import { CreateTaskForm } from "./CreateTaskForm";
 import { TaskItem } from "./TaskItem";
+import { useTasks } from "../hooks/useTasks";
 
 export function TaskList () {
-    // タスク一覧の状態を管理
-    const [taskList, setTaskList] = useState(() => {
-        // ローカルストレージから "taskList" のデータを取得
-        const taskListStorage = localStorage.getItem("taskList");
-        // ローカルストレージにデータがあれば、それをパスして返し、なければからの配列を返す
-        return JSON.parse(taskListStorage ?? "[]");
-    });
-
-    useEffect(() => {
-        localStorage.setItem("taskList", JSON.stringify(taskList));
-    }, [taskList])
-
-    // 新しいタスクを追加
-    const createTask = (title) => {
-        setTaskList((prevTaskList) => {
-            // 新しいタスクオブジェクトを生成
-            const newTask = {
-                id: Date.now(), // 現在の時刻を ID として使用
-                title,
-                status: "notStarted", // 初期状態は「未着手」
-            }
-            // 既存のタスク一覧に新しいタスクを追加
-            return [...prevTaskList, newTask];
-        })
-    }
-
-    // ゴミ箱のタスクを除いたタスク一覧
-    const activeTaskList = taskList.filter(({ status }) => status !== "trashed");
-
-    // タスクを更新する
-    const updateTask = (id, updatedTask) => {
-        setTaskList((prevTaskList) => {
-            return prevTaskList.map((task) =>
-                // 対象タスクのidが一致する場合、そのタスクを更新
-                task.id === id ? { ...task, ...updatedTask } : task,
-            )
-        })
-    }
+    const { activeTaskList, createTask, updateTask } = useTasks();
 
     return (
         <div className="relative">
